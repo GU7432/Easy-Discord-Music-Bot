@@ -43,7 +43,6 @@ async def on_wavelink_track_end(payload: wavelink.TrackEndEventPayload):
     await player.play(next_track)
 
 
-
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
@@ -69,6 +68,7 @@ async def on_ready():
 
 @bot.command()
 async def join(ctx):
+    """加入使用者所在語音"""
     if not ctx.author.voice:
         await ctx.send("你要先進語音頻道。")
         return
@@ -88,6 +88,7 @@ async def join(ctx):
 
 @bot.command()
 async def play(ctx, *, query: str):
+    """播放音樂"""
     if not ctx.author.voice:
         await ctx.send("你要先進語音頻道。")
         return
@@ -116,6 +117,7 @@ async def play(ctx, *, query: str):
 
 @bot.command()
 async def pause(ctx):
+    """暫停"""
     player: MusicPlayer | None = ctx.voice_client
 
     if player is None:
@@ -128,6 +130,7 @@ async def pause(ctx):
 
 @bot.command()
 async def resume(ctx):
+    """繼續播放"""
     player: MusicPlayer | None = ctx.voice_client
 
     if player is None:
@@ -140,6 +143,7 @@ async def resume(ctx):
 
 @bot.command()
 async def stop(ctx):
+    """暫停並清空隊列"""
     player: MusicPlayer | None = ctx.voice_client
 
     if player is None:
@@ -153,6 +157,7 @@ async def stop(ctx):
 
 @bot.command()
 async def leave(ctx):
+    """讓機器人離開語音頻道"""
     player: MusicPlayer | None = ctx.voice_client
 
     if player is None:
